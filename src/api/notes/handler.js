@@ -128,6 +128,8 @@ class NotesHandler {
     try {
       const { id } = request.params;
       await this._service.deleteNoteById(id);
+
+      console.log(id);
  
       return {
         status: 'success',

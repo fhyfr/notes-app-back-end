@@ -66,14 +66,16 @@ class NotesService {
   }
 
   async deleteNoteById(id) {
+    console.log(id);
     const query = {
       text: 'DELETE FROM notes WHERE id=$1',
       values: [id],
     };
 
     const result = await this._pool.query(query);
+    console.log(result);
 
-    if(!result.rows.length) {
+    if(!result.rowCount) {
       throw new NotFoundError('Gagal menghapus catatan. Id tidak ditemukan');
     }
   }
