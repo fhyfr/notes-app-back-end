@@ -1,6 +1,5 @@
 const { Pool } = require('pg');
 const InvariantError = require('../../exceptions/InvariantError');
-const NotFoundError = require('../../exceptions/NotFoundError');
 
 class AuthenticationsService {
   constructor() {
@@ -21,6 +20,7 @@ class AuthenticationsService {
       text: 'SELECT * FROM authentications WHERE token=$1',
       values: [token],
     };
+
 
     const result = await this._pool.query(query);
 
