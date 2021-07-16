@@ -1,4 +1,3 @@
-
 const routes = (handler) => [
   {
     method: 'POST',
@@ -14,8 +13,7 @@ const routes = (handler) => [
     method: 'GET',
     path: '/users',
     handler: handler.getUsersByUsernameHandler,
-  }
+  },
 ];
 
 module.exports = routes;
-

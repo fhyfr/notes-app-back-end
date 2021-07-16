@@ -19,4 +19,4 @@ module.exports = {
 
     server.route(routes(authenticationsHandler));
   },
-}
+};

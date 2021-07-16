@@ -10,9 +10,9 @@ class UsersService {
     this._pool = new Pool();
   }
 
-  async addUser({username, password, fullname}) {
+  async addUser({ username, password, fullname }) {
     await this.verifyNewUsername(username);
-    
+
     const id = `user-${nanoid(16)}`;
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -23,12 +23,12 @@ class UsersService {
 
     const result = await this._pool.query(query);
 
-    if(!result.rows.length) {
+    if (!result.rows.length) {
       throw new InvariantError('User gagal ditambahkan');
     }
 
     return result.rows[0].id;
-  };
+  }
 
   async verifyNewUsername(username) {
     const query = {
@@ -38,10 +38,10 @@ class UsersService {
 
     const result = await this._pool.query(query);
 
-    if(result.rows.length > 0) {
-      throw new InvariantError('Gagal menambahkan user. Username sudah digunakan.')
+    if (result.rows.length > 0) {
+      throw new InvariantError('Gagal menambahkan user. Username sudah digunakan.');
     }
-  };
+  }
 
   async getUserById(userId) {
     const query = {
@@ -52,7 +52,7 @@ class UsersService {
     const result = await this._pool.query(query);
     console.log(result);
 
-    if(!result.rows.length) {
+    if (!result.rows.length) {
       throw new NotFoundError('User tidak ditemukan');
     }
 
@@ -80,7 +80,7 @@ class UsersService {
 
     return id;
   }
-  
+
   async getUsersByUsername(username) {
     const query = {
       text: 'SELECT id, username, fullname FROM users WHERE username LIKE $1',

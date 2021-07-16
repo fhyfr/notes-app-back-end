@@ -1,5 +1,5 @@
-const UsersHandler = require("./handler");
-const routes = require("./routes");
+const UsersHandler = require('./handler');
+const routes = require('./routes');
 
 module.exports = {
   name: 'users',
@@ -9,4 +9,3 @@ module.exports = {
     server.route(routes(usersHandler));
   },
 };
-

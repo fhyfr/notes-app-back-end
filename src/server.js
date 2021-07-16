@@ -23,7 +23,12 @@ const AuthenticationsService = require('./services/postgres/AuthenticationsServi
 // collaborations
 const collaborations = require('./api/collaborations');
 const CollaborationsService = require('./services/postgres/CollaborationsService');
-const CollaboraionsValidator = require('./validator/collaborations');
+const CollaborationsValidator = require('./validator/collaborations');
+
+// export notes
+const _exports = require('./api/exports');
+const ProducerService = require('./services/rabbitmq/ProducerService');
+const ExportsValidator = require('./validator/exports');
 
 const init = async () => {
   const collaborationsService = new CollaborationsService();
@@ -33,7 +38,7 @@ const init = async () => {
 
   const server = Hapi.server({
     port: process.env.PORT,
-    host: process.env.HOST ,
+    host: process.env.HOST,
     routes: {
       cors: {
         origin: ['*'],
@@ -45,7 +50,7 @@ const init = async () => {
   await server.register([
     {
       plugin: Jwt,
-    }
+    },
   ]);
 
   // mendefinisikan strategi autentikasi jwt
@@ -83,7 +88,7 @@ const init = async () => {
     {
       plugin: authentications,
       options: {
-        authenticationsService, 
+        authenticationsService,
         usersService,
         tokenManager: TokenManager,
         validator: AuthenticationsValidator,
@@ -94,9 +99,16 @@ const init = async () => {
       options: {
         collaborationsService,
         notesService,
-        validator: CollaboraionsValidator,
+        validator: CollaborationsValidator,
       },
-    }
+    },
+    {
+      plugin: _exports,
+      options: {
+        service: ProducerService,
+        validator: ExportsValidator,
+      },
+    },
   ]);
 
   await server.start();

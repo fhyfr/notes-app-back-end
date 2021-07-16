@@ -27,7 +27,6 @@ class UsersHandler {
 
       response.code(201);
       return response;
-
     } catch (error) {
       return errorHandler(error, h);
     }
@@ -44,9 +43,8 @@ class UsersHandler {
         status: 'success',
         data: {
           user,
-        }
-      }
-
+        },
+      };
     } catch (error) {
       return errorHandler(error, h);
     }
@@ -63,7 +61,6 @@ class UsersHandler {
           users,
         },
       };
-
     } catch (error) {
       return errorHandler(error, h);
     }
