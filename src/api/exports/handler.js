@@ -17,7 +17,7 @@ class ExportsHandler {
         targetEmail: request.payload.targetEmail,
       };
 
-      await this._service.sendMessage('export: notes', JSON.stringify(message));
+      await this._service.sendMessage('export:notes', JSON.stringify(message));
 
       const response = h.response({
         status: 'success',
