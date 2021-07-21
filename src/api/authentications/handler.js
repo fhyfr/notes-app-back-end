@@ -1,4 +1,3 @@
-const ClientError = require('../../exceptions/ClientError');
 const errorHandler = require('../../exceptions/ErrorHandler');
 
 class AuthenticationsHandler {
@@ -63,7 +62,6 @@ class AuthenticationsHandler {
 
   async deleteAuthenticationHandler(request, h) {
     try {
-      console.log(request.payload);
       this._validator.validateDeleteAuthenticationPayload(request.payload);
       const { refreshToken } = request.payload;
 

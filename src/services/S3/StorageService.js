@@ -12,7 +12,7 @@ class StorageService {
       Body: file._data, // Berkas (dalam bentuk Buffer) yang akan disimpan
       ContentType: meta.headers['content-type'], // MIME Type berkas yang akan disimpan
     };
-    
+
     return new Promise((resolve, reject) => {
       this._S3.upload(parameter, (error, data) => {
         if (error) {
@@ -23,6 +23,5 @@ class StorageService {
     });
   }
 }
-
 
 module.exports = StorageService;

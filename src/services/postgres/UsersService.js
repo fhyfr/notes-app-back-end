@@ -50,7 +50,6 @@ class UsersService {
     };
 
     const result = await this._pool.query(query);
-    console.log(result);
 
     if (!result.rows.length) {
       throw new NotFoundError('User tidak ditemukan');
